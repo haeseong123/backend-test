@@ -1,5 +1,6 @@
 import { ThrottlerGuard } from '@nestjs/throttler';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { ErrorMessage } from 'src/common/exception/error-message';
 
 @Injectable()
 export class AServerThrottlerGuard extends ThrottlerGuard {
@@ -14,7 +15,7 @@ export class AServerThrottlerGuard extends ThrottlerGuard {
     const id = req.headers.id;
 
     if (!id) {
-      throw new Error('에러 발생!');
+      throw new BadRequestException(ErrorMessage.CUSTOM_ID_HEADER_IS_MISSING);
     }
 
     return id;
