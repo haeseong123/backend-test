@@ -15,7 +15,29 @@ export class AServerController {
    */
   @UseGuards(AServerThrottlerGuard)
   @Get()
-  proxy() {
-    return this.aServerService.proxy(AServerApiPath.ROOT);
+  async get(): Promise<boolean> {
+    return await this.aServerService.get(AServerApiPath.ROOT);
   }
+
+  /**
+   * post, put, delete를 열어줘야 한다면 아래처럼 작성하면 됩니다.
+   *
+   * @UseGuards(AServerThrottlerGuard)
+   * @Post()
+   * async post(): Promise<boolean> {
+   *   return await this.aServerService.post(AServerApiPath.ROOT);
+   * }
+   *
+   * @UseGuards(AServerThrottlerGuard)
+   * @Put()
+   * async put(): Promise<boolean> {
+   *   return await this.aServerService.put(AServerApiPath.ROOT);
+   * }
+   *
+   * @UseGuards(AServerThrottlerGuard)
+   * @Delete()
+   * async delete(): Promise<boolean> {
+   *   return await this.aServerService.delete(AServerApiPath.ROOT);
+   * }
+   */
 }
