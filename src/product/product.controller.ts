@@ -10,12 +10,12 @@ export class ProductController {
    * 외부에서 "/challenge1"을 호출할 수 있도록 API 노출
    */
   @Get('challenge1')
-  async challenge1(): Promise<number> {
+  challenge1(): number {
     const dto: ProductKeywordDto = {
-      name: '의자',
       keyword: '가구',
+      name: '예제 상품명',
     };
 
-    return await this.productService.challenge1(dto);
+    return this.productService.challenge1(dto);
   }
 }
