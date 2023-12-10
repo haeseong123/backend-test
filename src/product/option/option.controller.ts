@@ -10,7 +10,7 @@ export class OptionController {
    * 외부에서 "/challenge2"를 호출할 수 있도록 API 노출
    */
   @Get('challenge2')
-  async challenge2(): Promise<number> {
+  challenge2(): number {
     const dtos: OptionDto[] = [
       { id: 1, name: '블랙 XL' },
       { id: 2, name: '블랙 L' },
@@ -23,6 +23,6 @@ export class OptionController {
       dtos.push({ id: index + 7, name: `블랙${index + 7}` });
     });
 
-    return await this.optionService.challenge2(dtos);
+    return this.optionService.challenge2(dtos);
   }
 }

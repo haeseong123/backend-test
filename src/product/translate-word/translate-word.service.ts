@@ -6,9 +6,12 @@ export class TranslateWordService {
   constructor() {}
 
   /**
+   * 실사용 시 repository를 사용하여
+   * DB에 있는 translateWord를 전부 가져오는 방식으로 동작
+   *
    * @returns translateWordList
    */
-  async findAll(): Promise<TranslateWord[]> {
+  findAll(): TranslateWord[] {
     const translateWordList: TranslateWord[] = [
       { src: '블랙', dest: '검정색' },
       { src: '레드', dest: '빨간색' },
