@@ -9,6 +9,7 @@ import {
 import { Response } from 'express';
 import { RapidResponse } from '../interceptor/rapid-response';
 import { instanceToPlain } from 'class-transformer';
+import { ErrorMessage } from '../exception/error-message';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -23,7 +24,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const message =
       exception instanceof HttpException
         ? exception.message
-        : 'Internal server error';
+        : ErrorMessage.INTERNAL_SERVER_ERROR;
     const responseBody: RapidResponse<null> = {
       statusCode,
       message,

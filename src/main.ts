@@ -11,7 +11,7 @@ import { AppModule } from './app.module';
  *
  * [구현 사항]
  *    - A 서버로 요청 보내기
- *        - [제한 사항]에 있는 [A 서버의 Rate Limit]을 넘기지 않도록 초당 요청이 10회를 초과한다면 Client에게 적절한 Error Message를 보냅니다.
+ *        - [제한 사항]에 있는 [A 서버의 Rate Limit]을 넘기지 않도록 초당 요청이 10회를 초과하지 않도록 적절히 요청을 전달합니다.
  *    - 상품 카테고리 매칭 (challenge1)
  *        1. Client로부터 productKeyword를 받습니다.
  *            - ProductKeyword: { categoryName: string, productName: string }
