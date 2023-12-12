@@ -8,10 +8,14 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptor } from './common/interceptor/response.interceptor';
 import { GlobalExceptionFilter } from './common/filter/global-exception.filter';
 import { ScheduleModule } from '@nestjs/schedule';
+import { CronModule } from './common/cron/cron.module';
+import { RapidHttpModule } from './common/rapid-http/rapid-http.module';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
+    CronModule,
+    RapidHttpModule,
     AServerModule,
     ProductModule,
     CategoryModule,

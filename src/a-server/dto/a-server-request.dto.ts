@@ -1,4 +1,4 @@
-import { AServerApiPath } from '../a-server-api-path';
+import { AServerApiPath } from '../enum/a-server-api-path';
 
 export class AServerRequestDto {
   path: AServerApiPath;

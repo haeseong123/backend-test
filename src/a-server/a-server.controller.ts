@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AServerService } from './a-server.service';
-import { AServerApiPath } from './a-server-api-path';
+import { AServerApiPath } from './enum/a-server-api-path';
 import { HeaderParam } from '../common/pipe/header-param';
 import { AServerRequestDto } from './dto/a-server-request.dto';
 
