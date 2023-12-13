@@ -18,7 +18,7 @@
 
 ### 작업 내용
 
-#### A 서버로 요청 전달
+#### A 서버로 요청 전달 (GET: /)
 
 client가 `/`로 `GET` 요청을 보내면 중계 서버는 해당 요청을 캐싱해 놓습니다.
 
@@ -92,7 +92,7 @@ private handleRequestQueues() {
 
 ---
 
-#### 상품 카테고리 매칭
+#### 상품 카테고리 매칭 (GET: /challenge1)
 
 client가 `/challenge1`로 `GET` 요청을 보내면 중계 서버는 제공된 키워드를 기반으로 카테고리 목록과 매칭하여 상품에 카테고리 정보를 연결합니다.
 
@@ -209,7 +209,7 @@ export class CategoryService {
 
 ---
 
-#### 단어 치환
+#### 단어 치환 (GET: /challenge2)
 
 client가 `/challenge2`로 `GET` 요청을 보내면 중계 서버는 옵션 이름에 나타난 특정 단어들을 주어진 단어 치환 목록을 사용하여 변경합니다.
 
