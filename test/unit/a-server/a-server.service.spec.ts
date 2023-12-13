@@ -2,36 +2,28 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AServerApiPath } from 'src/a-server/enum/a-server-api-path';
 import { AServerService } from 'src/a-server/a-server.service';
 import { AServerRequestDto } from 'src/a-server/dto/a-server-request.dto';
-import { CronService } from 'src/common/cron/cron.service';
-import { RapidHttpService } from 'src/common/rapid-http/rapid-http.service';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { LinkedQueue } from 'src/common/structure/que/linked/linked-queue';
 
 describe('AServerService', () => {
   let aServerService: AServerService;
-  let _cronService: CronService;
-  let _rapidHttpService: RapidHttpService;
 
   beforeEach(async () => {
-    const rapidHttpServiceMock = {
-      sendRequest: jest.fn(),
-    };
-    const cronServiceMock = {
-      addCronJob: jest.fn(),
+    const cacheManagerMock = {
+      get: async () => new LinkedQueue(),
     };
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AServerService,
-        { provide: CronService, useValue: cronServiceMock },
-        { provide: RapidHttpService, useValue: rapidHttpServiceMock },
+        { provide: CACHE_MANAGER, useValue: cacheManagerMock },
       ],
     }).compile();
 
     aServerService = module.get<AServerService>(AServerService);
-    _cronService = module.get<CronService>(CronService);
-    _rapidHttpService = module.get<RapidHttpService>(RapidHttpService);
   });
 
   describe('post', () => {
-    it('성공', () => {
+    it('성공', async () => {
       // Given
       const dto = new AServerRequestDto(
         AServerApiPath.ROOT,
@@ -40,7 +32,7 @@ describe('AServerService', () => {
       const expectValue = true;
 
       // When
-      const result = aServerService.post(dto);
+      const result = await aServerService.post(dto);
 
       // Then
       expect(result).toBe(expectValue);
@@ -48,7 +40,7 @@ describe('AServerService', () => {
   });
 
   describe('get', () => {
-    it('성공', () => {
+    it('성공', async () => {
       // Given
       const dto = new AServerRequestDto(
         AServerApiPath.ROOT,
@@ -57,7 +49,7 @@ describe('AServerService', () => {
       const expectValue = true;
 
       // When
-      const result = aServerService.get(dto);
+      const result = await aServerService.get(dto);
 
       // Then
       expect(result).toBe(expectValue);
@@ -65,7 +57,7 @@ describe('AServerService', () => {
   });
 
   describe('put', () => {
-    it('성공', () => {
+    it('성공', async () => {
       // Given
       const dto = new AServerRequestDto(
         AServerApiPath.ROOT,
@@ -74,7 +66,7 @@ describe('AServerService', () => {
       const expectValue = true;
 
       // When
-      const result = aServerService.put(dto);
+      const result = await aServerService.put(dto);
 
       // Then
       expect(result).toBe(expectValue);
@@ -82,7 +74,7 @@ describe('AServerService', () => {
   });
 
   describe('delete', () => {
-    it('성공', () => {
+    it('성공', async () => {
       // Given
       const dto = new AServerRequestDto(
         AServerApiPath.ROOT,
@@ -91,7 +83,7 @@ describe('AServerService', () => {
       const expectValue = true;
 
       // When
-      const result = aServerService.delete(dto);
+      const result = await aServerService.delete(dto);
 
       // Then
       expect(result).toBe(expectValue);

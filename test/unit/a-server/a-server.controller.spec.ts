@@ -20,15 +20,15 @@ describe('AServerController', () => {
   });
 
   describe('/ 호출', () => {
-    it('성공', () => {
+    it('성공', async () => {
       // Given
       const id = '0000-0000-0000-0000';
       const expectValue = true;
 
-      jest.spyOn(aServerService, 'get').mockReturnValue(expectValue);
+      jest.spyOn(aServerService, 'get').mockResolvedValue(expectValue);
 
       // When
-      const result = aServerController.get(id);
+      const result = await aServerController.get(id);
 
       // Then
       expect(result).toBe(expectValue);

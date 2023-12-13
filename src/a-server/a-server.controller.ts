@@ -12,7 +12,7 @@ export class AServerController {
    * 외부에서 "/"를 호출할 수 있도록 API 노출
    */
   @Get()
-  get(@HeaderParam('id') id: string): boolean {
+  async get(@HeaderParam('id') id: string): Promise<boolean> {
     const dto = new AServerRequestDto(AServerApiPath.ROOT, id);
 
     return this.aServerService.get(dto);

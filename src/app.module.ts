@@ -10,9 +10,12 @@ import { GlobalExceptionFilter } from './common/filter/global-exception.filter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CronModule } from './common/cron/cron.module';
 import { RapidHttpModule } from './common/rapid-http/rapid-http.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import { IdBasedHttpRequestInterceptor } from './common/interceptor/id-based-http-request.interceptor';
 
 @Module({
   imports: [
+    CacheModule.register({ isGlobal: true }),
     ScheduleModule.forRoot(),
     CronModule,
     RapidHttpModule,
@@ -24,6 +27,7 @@ import { RapidHttpModule } from './common/rapid-http/rapid-http.module';
   ],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: ResponseInterceptor },
+    { provide: APP_INTERCEPTOR, useClass: IdBasedHttpRequestInterceptor },
     { provide: APP_FILTER, useClass: GlobalExceptionFilter },
   ],
 })

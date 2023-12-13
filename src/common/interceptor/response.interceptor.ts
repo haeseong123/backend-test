@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 import { Observable, map } from 'rxjs';
-import { Request } from 'express';
+import { Response } from 'express';
 import { RapidResponse } from './rapid-response';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class ResponseInterceptor<T>
     return next.handle().pipe(
       map((result: T) => {
         const statusCode =
-          context.switchToHttp().getResponse<Request>().statusCode || 200;
+          context.switchToHttp().getResponse<Response>().statusCode || 200;
         const message = this.getMessageFromStatusCode(statusCode);
         const successResponse: RapidResponse<T> = {
           statusCode,
