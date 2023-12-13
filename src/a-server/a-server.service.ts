@@ -73,17 +73,6 @@ export class AServerService {
   }
 
   /**
-   * ID를 key로 사용하여 idQueues에 있는 특정 queue를 가져옵니다.
-   *
-   * ID에 해당되는 queue가 없다면 map.set()으로 새 queue를 추가한 후 해당 queue를 반환합니다.
-   */
-  private getOrCreateQueue(id: string): Queue<SendRequestDto> {
-    return (
-      this.idQueues.get(id) || this.idQueues.set(id, new LinkedQueue()).get(id)!
-    );
-  }
-
-  /**
    * HOME_URL의 뒷부분에 path를 더한 uri를 반환합니다.
    */
   private getUri(path: string): string {
@@ -96,6 +85,17 @@ export class AServerService {
   private throwInternalServerExceptionWithId(id: string): never {
     throw new InternalServerErrorException(
       `[${id}] ${ErrorMessage.REQUEST_TO_ANOTHER_SERVER_FAILS}`,
+    );
+  }
+
+  /**
+   * ID를 key로 사용하여 idQueues에 있는 특정 queue를 가져옵니다.
+   *
+   * ID에 해당되는 queue가 없다면 map.set()으로 새 queue를 추가한 후 해당 queue를 반환합니다.
+   */
+  private getOrCreateQueue(id: string): Queue<SendRequestDto> {
+    return (
+      this.idQueues.get(id) || this.idQueues.set(id, new LinkedQueue()).get(id)!
     );
   }
 
